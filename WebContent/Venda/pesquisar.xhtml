@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+    <h:head>
+        <link rel="StyleSheet" type="text/css" href="../../css/projeto.css" media="screen" />
+    </h:head>
+    <body> 
+        <h2>Pesquisa de Vendas</h2>
+        <h:form id="inclusaoVenda">
+            Descrição : 
+            <h:inputText id="nome" value="#{VendaVB.descricao}" size="50" label="Descrição" />
+            &nbsp;
+            <h:commandButton value="Pesquisar" action="#{VendaVB.pesquisar}"
+                                   ajax="false"/>
+            <br/><br/>
+            <h:dataTable value="#{VendaVB.listaVenda}" 
+                         var="Venda"
+                         cellpadding="5"
+                         styleClass="tabela"
+                         headerClass="cabecalho"
+                         rowClasses="linha-impar,linha-par"
+                         width="100%">
+                <h:column>
+                    <f:facet name="header">Id.</f:facet>
+                    <h:commandLink action="#{VendaVB.consultar}" value="#{Venda.id}">
+				        <f:setPropertyActionListener target="#{VendaVB.id}" value="#{Venda.id}" />
+				        <f:setPropertyActionListener target="#{VendaVB.tela}" value="consultar" />
+                    </h:commandLink>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Descrição</f:facet>
+                    <h:outputText value="#{Venda.descricao}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Quantidade de Produto</f:facet>
+                    <h:outputText value="#{Venda.quantidadeProduto}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Valor</f:facet>
+                    <h:outputText value="#{Venda.valor}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Data da Venda</f:facet>
+                    <h:outputText value="#{Venda.data}">
+				        <f:converter converterId="dataConverter"/>
+                    </h:outputText>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Nota Fiscal</f:facet>
+                    <h:outputText value="#{Venda.notaFiscal}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Id do Produto</f:facet>
+                    <h:outputText value="#{Venda.idProduto}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Id do Cliente</f:facet>
+                    <h:outputText value="#{Venda.idCliente}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Alterar</f:facet>
+                    <h:commandButton value="Alterar" action="#{VendaVB.consultar}" ajax="false">
+				        <f:setPropertyActionListener target="#{VendaVB.id}" value="#{Venda.id}" />
+				        <f:setPropertyActionListener target="#{VendaVB.tela}" value="alterar" />
+			        </h:commandButton>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Excluir</f:facet>
+                    <h:commandButton value="Excluir" action="#{VendaVB.consultar}" ajax="false">
+				        <f:setPropertyActionListener target="#{VendaVB.id}" value="#{Venda.id}" />
+				        <f:setPropertyActionListener target="#{VendaVB.tela}" value="excluir" />
+			        </h:commandButton>
+                </h:column>
+                
+            </h:dataTable>        
+            <h:messages errorStyle="color:red;margin:8px;" infoStyle="color:blue;margin:8px;" layout="table"/>
+			<br/>
+            <h:commandButton value="Home" action="/index" immediate="true"/>
+        </h:form>
+    </body> 
+</html>

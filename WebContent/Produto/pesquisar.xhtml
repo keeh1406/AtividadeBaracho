@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+    <h:head>
+        <link rel="StyleSheet" type="text/css" href="../../css/projeto.css" media="screen" />
+    </h:head>
+    <body> 
+        <h2>Pesquisa de Produtos</h2>
+        <h:form id="inclusaoProduto">
+            Nome : 
+            <h:inputText id="nome" value="#{ProdutoVB.nome}" size="50" label="Nome" />
+            &nbsp;
+            <h:commandButton value="Pesquisar" action="#{ProdutoVB.pesquisar}"
+                                   ajax="false"/>
+            <br/><br/>
+            <h:dataTable value="#{ProdutoVB.listaProduto}" 
+                         var="Produto"
+                         cellpadding="5"
+                         styleClass="tabela"
+                         headerClass="cabecalho"
+                         rowClasses="linha-impar,linha-par"
+                         width="100%">
+                <h:column>
+                    <f:facet name="header">Id.</f:facet>
+                    <h:commandLink action="#{ProdutoVB.consultar}" value="#{Produto.id}">
+				        <f:setPropertyActionListener target="#{ProdutoVB.id}" value="#{Produto.id}" />
+				        <f:setPropertyActionListener target="#{ProdutoVB.tela}" value="consultar" />
+                    </h:commandLink>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Nome</f:facet>
+                    <h:outputText value="#{Produto.nome}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Descrição</f:facet>
+                    <h:outputText value="#{Produto.descricao}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Data de Validade</f:facet>
+                    <h:outputText value="#{Produto.dataValidade}">
+				        <f:converter converterId="dataConverter"/>
+                    </h:outputText>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Marca</f:facet>
+                    <h:outputText value="#{Produto.marca}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Id da Loja</f:facet>
+                    <h:outputText value="#{Produto.idLoja}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Alterar</f:facet>
+                    <h:commandButton value="Alterar" action="#{ProdutoVB.consultar}" ajax="false">
+				        <f:setPropertyActionListener target="#{ProdutoVB.id}" value="#{Produto.id}" />
+				        <f:setPropertyActionListener target="#{ProdutoVB.tela}" value="alterar" />
+			        </h:commandButton>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Excluir</f:facet>
+                    <h:commandButton value="Excluir" action="#{ProdutoVB.consultar}" ajax="false">
+				        <f:setPropertyActionListener target="#{ProdutoVB.id}" value="#{Produto.id}" />
+				        <f:setPropertyActionListener target="#{ProdutoVB.tela}" value="excluir" />
+			        </h:commandButton>
+                </h:column>
+                
+            </h:dataTable>        
+            <h:messages errorStyle="color:red;margin:8px;" infoStyle="color:blue;margin:8px;" layout="table"/>
+			<br/>
+            <h:commandButton value="Home" action="/index" immediate="true"/>
+        </h:form>
+    </body> 
+</html>
