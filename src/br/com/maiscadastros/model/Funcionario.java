@@ -2,117 +2,119 @@ package br.com.maiscadastros.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import br.com.maiscadastros.model.Usuario;
 
-public class Funcionario extends Usuario
-{
-    // Atributos
-    private LocalDate dataNascimento;
-    private long      telefone;
-    private long      cpf;
-    private String    endereco;
-    private boolean   flGerente;
-    private int       idLoja;
+@Entity
+@Table(name = "TABELA_FUNCIONARIO")
+public class Funcionario extends Usuario {
+	// Atributos
+	@Column(name = "DataNascimento_Funcionario")
+	private LocalDate dataNascimento;
 
-    // Construtores
-    public Funcionario()
-    {
-        super();
-    }
+	@Column(name = "Telefone_Funcionario")
+	private long telefone;
 
-    public Funcionario(int pId, String pNome, LocalDate pDataNascimento, long pTelefone, String pEmail, String pSenha, long pCpf, String pEndereco, Boolean pFlGerente, int pIdLoja)
-    {
-        super(pId, pEmail, pSenha, pNome);
-        setDataNascimento(pDataNascimento);
-        setTelefone(pTelefone);
-        setCpf(pCpf);
-        setEndereco(pEndereco);
-        setFlGerente(pFlGerente);
-        setIdLoja(pIdLoja);
-    }
+	@Column(name = "CPF_Funcionario")
+	private long cpf;
 
-    // Métodos de acesso
+	@Column(name = "Endereco_Funcionario")
+	private String endereco;
 
-    public LocalDate getDataNascimento()
-    {
-        return dataNascimento;
-    }
+	@Column(name = "FL_GERENTE")
+	private boolean flGerente;
 
-    public void setDataNascimento(LocalDate pDataNascimento)
-    {
-        dataNascimento = pDataNascimento;
-    }
+	@Column(name = "IDLOJA")
+	private Loja loja;
 
-    public long getTelefone()
-    {
-        return telefone;
-    }
+	// Construtores
+	public Funcionario() {
+		super();
+	}
 
-    public void setTelefone(long pTelefone)
-    {
-        telefone = pTelefone;
-    }
+	public Funcionario(int pId, String pNome, LocalDate pDataNascimento, long pTelefone, String pEmail, String pSenha,
+			long pCpf, String pEndereco, Boolean pFlGerente, Loja loja) {
+		super(pId, pEmail, pSenha, pNome);
+		setDataNascimento(pDataNascimento);
+		setTelefone(pTelefone);
+		setCpf(pCpf);
+		setEndereco(pEndereco);
+		setFlGerente(pFlGerente);
+		setLoja(loja);
+	}
 
-    public long getCpf()
-    {
-        return cpf;
-    }
+	// Métodos de acesso
 
-    public void setCpf(long pCpf)
-    {
-        cpf = pCpf;
-    }
+	public LocalDate getDataNascimento() {
+		return dataNascimento;
+	}
 
-    public String getEndereco()
-    {
-        return endereco;
-    }
+	public void setDataNascimento(LocalDate pDataNascimento) {
+		dataNascimento = pDataNascimento;
+	}
 
-    public void setEndereco(String pEndereco)
-    {
-        endereco = pEndereco;
-    }
+	public long getTelefone() {
+		return telefone;
+	}
 
-    public boolean getFlGerente()
-    {
-        return flGerente;
-    }
+	public void setTelefone(long pTelefone) {
+		telefone = pTelefone;
+	}
 
-    public void setFlGerente(Boolean pFlGerente)
-    {
-        flGerente = pFlGerente;
-    }
+	public long getCpf() {
+		return cpf;
+	}
 
-    public int getIdLoja()
-    {
-        return idLoja;
-    }
+	public void setCpf(long pCpf) {
+		cpf = pCpf;
+	}
 
-    public void setIdLoja(int pIdLoja)
-    {
-        idLoja = pIdLoja;
-    }
+	public String getEndereco() {
+		return endereco;
+	}
 
-    // Métodos gerais
-    @Override
-    public String toString()
-    {
-        StringBuilder tBuilder = new StringBuilder();
-        tBuilder.append("[");
-        tBuilder.append(super.toString());
-        tBuilder.append(", ");
-        tBuilder.append(getDataNascimento());
-        tBuilder.append(", ");
-        tBuilder.append(getTelefone());
-        tBuilder.append(", ");
-        tBuilder.append(getCpf());
-        tBuilder.append(", ");
-        tBuilder.append(getEndereco());
-        tBuilder.append(", ");
-        tBuilder.append(getFlGerente());
-        tBuilder.append(", ");
-        tBuilder.append(getIdLoja());
-        tBuilder.append("]");
-        return tBuilder.toString();
-    }
+	public void setEndereco(String pEndereco) {
+		endereco = pEndereco;
+	}
+
+	public boolean getFlGerente() {
+		return flGerente;
+	}
+
+	public void setFlGerente(Boolean pFlGerente) {
+		flGerente = pFlGerente;
+	}
+
+	public Loja getLoja() {
+		return loja;
+	}
+
+	public void setLoja(Loja loja) {
+		this.loja = loja;
+	}
+
+	// Métodos gerais
+	@Override
+	public String toString() {
+		StringBuilder tBuilder = new StringBuilder();
+		tBuilder.append("[");
+		tBuilder.append(super.toString());
+		tBuilder.append(", ");
+		tBuilder.append(getDataNascimento());
+		tBuilder.append(", ");
+		tBuilder.append(getTelefone());
+		tBuilder.append(", ");
+		tBuilder.append(getCpf());
+		tBuilder.append(", ");
+		tBuilder.append(getEndereco());
+		tBuilder.append(", ");
+		tBuilder.append(getFlGerente());
+		tBuilder.append(", ");
+		tBuilder.append(getLoja());
+		tBuilder.append("]");
+		return tBuilder.toString();
+	}
 }

@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+<body>
+
+	<!-- <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel value="Username:" />
+            <p:inputText label="username" />
+
+	</h:panelGrid>
+ -->	
+	
+	<div align="center">
+		<h:form id="cliente">
+		<h1>Sistema de Controle de Cadastro</h1>
+			
+			<p:panelGrid id="formulario" style="width:50%;">
+				
+				<p:focus context="formulario" />
+				<f:facet name="header" style="width:100%">
+					        Inclusão de Clientes
+                </f:facet>
+
+				<div >
+				<h:outputText value="Identificador : " />
+				<p:inputText id="id" value="#{ClienteVB.id}" size="20"
+					disabled="true" label="Identificador" />
+				</div>
+
+
+				<h:outputText value="E-mail : " />
+				<p:inputText id="email" value="#{ClienteVB.email}" size="50"
+					label="Email" />
+
+
+
+				<h:outputText value="Senha : " />
+				<p:password id="senha" redisplay="true" value="#{ClienteVB.senha}"
+					size="10" required="true" label="Senha" />
+
+
+				<h:outputText value="Nome : " />
+				<p:inputText id="nome" value="#{ClienteVB.nome}" size="50"
+					required="true" label="Nome" />
+
+
+
+				<h:outputText value="Data de Nascimento : " />
+				<p:inputText id="dataNascimento" value="#{ClienteVB.dataNascimento}"
+					size="10" required="true" label="Data de Nascimento">
+					<f:convertDateTime pattern="d/M/yyyy" />
+				</p:inputText>
+
+
+
+				<h:outputText value="Telefone : " />
+				<p:inputText id="telefone" value="#{ClienteVB.telefone}" size="15"
+					required="true" label="Telefone" />
+
+
+
+				<h:outputText value="CPF : " />
+				<p:inputText id="cpf" value="#{ClienteVB.cpf}" size="11"
+					required="true" label="CPF" />
+
+
+
+				<h:outputText value="Endereço : " />
+				<p:inputText id="endereco" value="#{ClienteVB.endereco}" size="40"
+					required="true" label="Endereço" />
+
+
+
+				<p:commandButton value="Cadastrar" action="#{ClienteVB.cadastrar}"
+					ajax="false" />
+                           &nbsp;                        
+                           <p:commandButton value="Limpar"
+					action="#{ClienteVB.limpar}" immediate="true" ajax="false">
+					<f:setPropertyActionListener target="#{ClienteVB.tela}"
+						value="limpar" />
+				</p:commandButton>
+				<p:messages />
+
+			</p:panelGrid>
+			<br />
+			<p:commandButton value="Home" action="/index" immediate="true" />
+		</h:form>
+	</div>
+</body>
+</html>

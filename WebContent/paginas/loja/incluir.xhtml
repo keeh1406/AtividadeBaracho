@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+    <h:head>
+    </h:head>
+    <body> 
+        <h1>Sistema de Controle de Cadastro</h1> 
+         <div align="center">
+            <h:form id="Loja">
+            <p:panelGrid id="formulario" style="width:75%;">
+                <p:focus context="formulario"/>
+                <f:facet name="header">
+                    <p:row>
+                        <p:column colspan="2" style="font-size:14px">
+                            Inclusão de Loja
+                        </p:column>
+                    </p:row>
+                </f:facet>
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText value="Identificador : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="id" value="#{LojaVB.id}" size="20" disabled="true" label="Identificador" />
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="E-mail : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="email" value="#{LojaVB.email}" size="50" label="Email" />
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Nome : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="nome" value="#{LojaVB.nome}" size="50" required="true" label="Nome" />
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Telefone : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="telefone" value="#{LojaVB.telefone}" size="15" required="true" label="Telefone" />
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="CNPJ : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="cnpj" value="#{LojaVB.cnpj}" size="14" required="true" label="CNPJ" />
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Endereço : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="endereco" value="#{LojaVB.endereco}" size="40" required="true" label="Endereço" />
+                    </p:column>
+                </p:row>
+                
+                   <p:row>
+                       <p:column colspan="2" style="text-align:center;">
+			               <p:commandButton value="Cadastrar" action="#{LojaVB.cadastrar}" ajax="false"/>
+                           &nbsp;                        
+                           <p:commandButton value="Limpar" action="#{LojaVB.limpar}" immediate="true" ajax="false">
+                              <f:setPropertyActionListener target="#{LojaVB.tela}" value="limpar" />
+                           </p:commandButton>
+                       </p:column>
+                   </p:row>
+                   <p:row>
+                       <p:column colspan="2">
+                           <p:messages />
+                       </p:column>
+                   </p:row>
+            </p:panelGrid>
+            <br/>
+            <p:commandButton value="Home" action="/index" immediate="true"/>
+          </h:form>
+        </div>
+    </body> 
+</html>

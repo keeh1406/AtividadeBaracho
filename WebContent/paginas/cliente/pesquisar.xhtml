@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:decorate template="../layout.xhtml">
+	<ui:define name="corpo">
+
+			<h2>Pesquisa de Clientes</h2>
+			<h:form id="inclusaoCliente">
+            Nome : 
+            <h:inputText id="nome" size="50" label="Nome" />
+            &nbsp;
+            <h:commandButton value="Pesquisar" ajax="false" />
+				<br />
+				<br />
+				<h:dataTable var="Cliente" cellpadding="5" styleClass="tabela"
+					headerClass="cabecalho" rowClasses="linha-impar,linha-par"
+					width="100%">
+
+					<h:column>
+						<f:facet name="header">Id.</f:facet>
+						<h:commandLink>
+							<f:setPropertyActionListener value="" target="" />
+							<f:setPropertyActionListener  value="" target=""  />
+						</h:commandLink>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header" >E-mail</f:facet>
+						<h:outputText />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Nome</f:facet>
+						<h:outputText />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Telefone</f:facet>
+						<h:outputText />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Data de Nascimento</f:facet>
+						<h:outputText>
+						</h:outputText>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">CPF</f:facet>
+						<h:outputText />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Endereço</f:facet>
+						<h:outputText />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Alterar</f:facet>
+						<h:commandButton value="Alterar" ajax="false">
+							<f:setPropertyActionListener   value="" target="" />
+							<f:setPropertyActionListener  value="" target=""  />
+						</h:commandButton>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Excluir</f:facet>
+						<h:commandButton value="Excluir" ajax="false">
+							<f:setPropertyActionListener  value="" target="" />
+							<f:setPropertyActionListener  value="" target=""  />
+						</h:commandButton>
+					</h:column>
+
+				</h:dataTable>
+				<h:messages errorStyle="color:red;margin:8px;"
+					infoStyle="color:blue;margin:8px;" layout="table" />
+				<br />
+				<h:commandButton value="Home" action="../index.xhtml" immediate="true" />
+			</h:form>
+	</ui:define>
+
+</ui:decorate>
+</html>

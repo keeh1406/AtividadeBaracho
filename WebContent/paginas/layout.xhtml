@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+	<title>Layout</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="../css/index-system.css" />
+
+</h:head>
+<body>
+
+
+	<div>
+		<p:graphicImage url="../img/logo.png"
+			style="	width: 20%; height: 10%; margin-top:2%; margin-left:3%; float: left;" />
+	</div>
+	<header>
+
+	<div class="conteiner" id="um">
+		<img class="icon" src="../img/icon-caixa.png" />
+		<p class="tx-nav">Caixa</p>
+	</div>
+
+	<div class="conteiner" id="dois">
+		<img class="icon" src="../img/icon-venda.png" />
+		<p class="tx-nav">Venda</p>
+	</div>
+
+	<div class="conteiner" id="tres">
+		<img class="icon" src="../img/icon-produto.png" />
+		<p class="tx-nav">Produto</p>
+	</div>
+
+	<div class="conteiner" id="quatro">
+		<img class="icon" src="../img/icon-fornecedor.png" />
+		<p class="tx-nav">Fornecedor</p>
+	</div>
+
+	<div class="conteiner" id="cinco">
+		<img class="icon" src="../img/icon-gestao.png" />
+		<p class="tx-nav">Gestão</p>
+	</div>
+
+	<div class="conteiner" id="seis">
+		<img class="icon" src="../img/icon-configuracao.png" />
+		<p class="tx-nav">'</p>
+	</div>
+	</header>
+
+	<p:layoutUnit position="center" style="width:100%;">
+
+		<ui:insert name="corpo" style="border-color:rgba(0,0,0,0);">
+
+			<!-- local que pode ter codigo de outrar paginas -->
+			<br />
+			<br />
+			<br />
+			<h2></h2>
+			<h:form id="inclusaoCliente">
+            Nome : 
+            <h:inputText id="nome" size="50" label="Nome" />
+            &nbsp;
+            <h:commandButton value="Pesquisar" ajax="false" />
+				<br />
+				<br />
+				<h:dataTable var="Cliente" cellpadding="5" styleClass="tabela"
+					headerClass="cabecalho" rowClasses="linha-impar,linha-par"
+					width="100%">
+
+					<h:column>
+						<f:facet name="header">Id.</f:facet>
+						<h:commandLink>
+							<f:setPropertyActionListener value="" target="" />
+							<f:setPropertyActionListener value="" target="" />
+						</h:commandLink>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">E-mail</f:facet>
+						<h:outputText />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Nome</f:facet>
+						<h:outputText />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Telefone</f:facet>
+						<h:outputText />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Data de Nascimento</f:facet>
+						<h:outputText>
+						</h:outputText>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">CPF</f:facet>
+						<h:outputText />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Endereço</f:facet>
+						<h:outputText />
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Alterar</f:facet>
+						<h:commandButton value="Alterar" ajax="false">
+							<f:setPropertyActionListener value="" target="" />
+							<f:setPropertyActionListener value="" target="" />
+						</h:commandButton>
+					</h:column>
+
+					<h:column>
+						<f:facet name="header">Excluir</f:facet>
+						<h:commandButton value="Excluir" ajax="false">
+							<f:setPropertyActionListener value="" target="" />
+							<f:setPropertyActionListener value="" target="" />
+						</h:commandButton>
+					</h:column>
+
+				</h:dataTable>
+				<h:messages errorStyle="color:red;margin:8px;"
+					infoStyle="color:blue;margin:8px;" layout="table" />
+				<br />
+				<h:commandButton value="Home" action="../index.xhtml"
+					immediate="true" />
+			</h:form>
+
+			<!-- termina -->
+		</ui:insert>
+	</p:layoutUnit>
+
+</body>
+</html>

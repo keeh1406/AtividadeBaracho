@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">  
+
+	<h:head>
+	</h:head>
+	<body> 
+        <h1>Sistema de Controle de Cadastro</h1> 
+         <div align="center">
+            <h:form id="cliente">
+            <p:panelGrid id="formulario" style="width:75%;">
+                <p:focus context="formulario"/>
+                <f:facet name="header">
+                    <p:row>
+                        <p:column colspan="2" style="font-size:14px">
+                            Alteração de Clientes
+                        </p:column>
+                    </p:row>
+                </f:facet>
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText value="Identificador : " />
+                    </p:column>
+                    <p:column>
+						<h:panelGroup>
+                        <p:inputText id="id" disabled="#{ClienteVB.edicao}" value="#{ClienteVB.id}" size="20" label="Identificador" />
+		       			&nbsp;
+					       <p:commandButton disabled="#{ClienteVB.edicao}" value="Pesquisar" action="#{ClienteVB.consultar}" ajax="false"/>
+						</h:panelGroup>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="E-mail : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="email" disabled="#{!ClienteVB.edicao}" value="#{ClienteVB.email}" size="50" label="Email" />
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Senha : " />
+                    </p:column>
+                    <p:column>
+                        <p:password id="senha" disabled="#{!ClienteVB.edicao}"  redisplay="true" value="#{ClienteVB.senha}" size="10" required="true" label="Senha" />
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Nome : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="nome" disabled="#{!ClienteVB.edicao}"  value="#{ClienteVB.nome}" size="50" required="true" label="Nome" />
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Data de Nascimento : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="dataNascimento" disabled="#{!ClienteVB.edicao}"  value="#{ClienteVB.dataNascimento}" size="10" required="true" label="Data de Nascimento" >
+                            <f:convertDateTime pattern="d/M/yyyy" />
+                        </p:inputText>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Telefone : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="telefone" disabled="#{!ClienteVB.edicao}"  value="#{ClienteVB.telefone}" size="15" required="true" label="Telefone" />
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="CPF : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="cpf" disabled="#{!ClienteVB.edicao}"  value="#{ClienteVB.cpf}" size="11" required="true" label="CPF" />
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Endereço : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="endereco" disabled="#{!ClienteVB.edicao}"  value="#{ClienteVB.endereco}" size="40" required="true" label="Endereço" />
+                    </p:column>
+                </p:row>
+                <h:messages errorStyle="color:red;margin:8px;" infoStyle="color:blue;margin:8px;" layout="table"/>
+                   <p:row>
+                       <p:column colspan="2" style="text-align:center;">
+					       <p:commandButton value="Confirma Alteração" disabled="#{!ClienteVB.edicao}" action="#{ClienteVB.alterar}" ajax="false">
+								<f:setPropertyActionListener target="#{ClienteVB.tela}" value="alterar" />
+					       </p:commandButton>
+                           &nbsp;                        
+				            <p:commandButton value="Excluir" disabled="#{!ClienteVB.edicao}" action="#{ClienteVB.consultar}" ajax="false">
+				                <f:setPropertyActionListener target="#{ClienteVB.tela}" value="excluir" />
+				            </p:commandButton>
+                       </p:column>
+                   </p:row>
+                   <p:row>
+                       <p:column colspan="2">
+                           <p:messages />
+                       </p:column>
+                   </p:row>
+            </p:panelGrid>
+            <br/>
+            <p:commandButton value="Home" action="/index" immediate="true"/>
+          </h:form>
+        </div>
+	</body> 
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+    </h:head>
+    <body> 
+        <h1>Sistema de Controle de Cadastro </h1>
+         <div align="center">
+            <h:form id="funcionario">
+            <p:panelGrid id="formulario" style="width:75%;">
+                <p:focus context="formulario"/>
+                <f:facet name="header">
+                    <p:row>
+                        <p:column colspan="2" style="font-size:14px">
+                            Inclusão de Funcionários
+                        </p:column>
+                    </p:row>
+                </f:facet>
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText value="Identificador : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="id" value="#{FuncionarioVB.id}" size="20" disabled="true" label="Identificador" />
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="E-mail : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="email" value="#{FuncionarioVB.email}" size="50" label="Email" />
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Senha : " />
+                    </p:column>
+                    <p:column>
+                        <p:password id="senha" redisplay="true" value="#{FuncionarioVB.senha}" size="10" required="true" label="Senha" />
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Nome : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="nome" value="#{FuncionarioVB.nome}" size="50" required="true" label="Nome" />
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Data de Nascimento : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="dataNascimento" value="#{FuncionarioVB.dataNascimento}" size="10" required="true" label="Data de Nascimento" >
+                            <f:convertDateTime pattern="d/M/yyyy" />
+                        </p:inputText>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Telefone : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="telefone" value="#{FuncionarioVB.telefone}" size="15" required="true" label="Telefone" />
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="CPF : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="cpf" value="#{FuncionarioVB.cpf}" size="11" required="true" label="CPF" />
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Endereço : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="endereco" value="#{FuncionarioVB.endereco}" size="40" required="true" label="Endereço" />
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Gerente : " />
+                    </p:column>
+                    <p:column>
+                        <p:selectBooleanCheckbox id="gerente" value="#{FuncionarioVB.flGerente}"/>
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Identificador da Loja : " />
+                    </p:column>
+                    <p:column>
+                        <p:selectOneMenu value="#{FuncionarioVB.idLoja}" label="Loja" required="true" >
+					<f:selectItem itemValue="#{null}" itemLabel="---Selecione----" noSelectionOption="true" />
+		   			<f:selectItems itemValue="#{Loja.id}" itemLabel="#{Loja.id} - #{Loja.nome}" value="#{FuncionarioVB.listaLoja}" var="Loja"/>
+		   			</p:selectOneMenu>
+                    </p:column>
+                </p:row>
+                
+                   <p:row>
+                       <p:column colspan="2" style="text-align:center;">
+			               <p:commandButton value="Cadastrar" action="#{FuncionarioVB.cadastrar}"
+                                            ajax="false"/>
+                           &nbsp;                        
+                           <p:commandButton value="Limpar" action="#{FuncionarioVB.limpar}" 
+                                            immediate="true"
+                                            ajax="false">
+                              <f:setPropertyActionListener target="#{FuncionarioVB.tela}" value="incluir" />
+                           </p:commandButton>
+                       </p:column>
+                   </p:row>
+                   <p:row>
+                       <p:column colspan="2">
+                           <p:messages />
+                       </p:column>
+                   </p:row>
+            </p:panelGrid>
+            <br/>
+            <p:commandButton value="Home" action="/index" immediate="true"/>
+          </h:form>
+        </div>
+    </body> 
+</html>

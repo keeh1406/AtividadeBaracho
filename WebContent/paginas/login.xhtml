@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../css/style.css" />
+<style>
+body {
+	background: url("../img/bg-1.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% 200%;
+	text-align: center;
+	margin: 0 auto; */
+}
+</style>
+</head>
+<body>
+	<div class="conteiner">
+
+		<p:graphicImage url="../img/logo.png"
+			style="	width: 50%; height: 27%; margin-top: -45px; margin-bottom: 30px;" />
+
+		<h:form>
+			<div class="form-input">
+				<input type="text" name="usuario" placeholder="Usuário" />
+			</div>
+
+			<div class="form-input">
+				<input type="password" name="senha" placeholder="Senha" />
+			</div>
+
+			<input class="btn-entrar" type="submit" name="submit"
+				value=" ENTRAR " />
+		</h:form>
+	</div>
+</body>
+
+</html>

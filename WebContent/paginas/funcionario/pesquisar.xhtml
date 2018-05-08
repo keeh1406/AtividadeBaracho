@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+    <h:head>
+        <link rel="StyleSheet" type="text/css" href="../../css/projeto.css" media="screen" />
+    </h:head>
+    <body> 
+        <h2>Pesquisa de Funcionarios</h2>
+        <h:form id="inclusaoFuncionario">
+            Nome : 
+            <h:inputText id="nome" value="#{FuncionarioVB.nome}" size="50" label="Nome" />
+            &nbsp;
+            <h:commandButton value="Pesquisar" action="#{FuncionarioVB.pesquisar}"
+                                   ajax="false"/>
+            <br/><br/>
+            <h:dataTable value="#{FuncionarioVB.listaFuncionario}" 
+                         var="Funcionario"
+                         cellpadding="5"
+                         styleClass="tabela"
+                         headerClass="cabecalho"
+                         rowClasses="linha-impar,linha-par"
+                         width="100%">
+                <h:column>
+                    <f:facet name="header">Id.</f:facet>
+                    <h:commandLink action="#{FuncionarioVB.consultar}" value="#{Funcionario.id}">
+				        <f:setPropertyActionListener target="#{FuncionarioVB.id}" value="#{Funcionario.id}" />
+				        <f:setPropertyActionListener target="#{FuncionarioVB.tela}" value="consultar" />
+                    </h:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">E-mail</f:facet>
+                    <h:outputText value="#{Funcionario.email}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Nome</f:facet>
+                    <h:outputText value="#{Funcionario.nome}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Telefone</f:facet>
+                    <h:outputText value="#{Funcionario.telefone}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Data de Nascimento</f:facet>
+                    <h:outputText value="#{Funcionario.dataNascimento}">
+				        <f:converter converterId="dataConverter"/>
+                    </h:outputText>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">CPF</f:facet>
+                    <h:outputText value="#{Funcionario.cpf}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Endereço</f:facet>
+                    <h:outputText value="#{Funcionario.endereco}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Gerente</f:facet>
+                    <h:selectBooleanCheckbox value="#{Funcionario.flGerente}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Id da Loja</f:facet>
+                    <h:outputText value="#{Funcionario.idLoja}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Alterar</f:facet>
+                    <h:commandButton value="Alterar" action="#{FuncionarioVB.consultar}" ajax="false">
+				        <f:setPropertyActionListener target="#{FuncionarioVB.id}" value="#{Funcionario.id}" />
+				        <f:setPropertyActionListener target="#{FuncionarioVB.tela}" value="alterar" />
+			        </h:commandButton>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Excluir</f:facet>
+                    <h:commandButton value="Excluir" action="#{FuncionarioVB.consultar}" ajax="false">
+				        <f:setPropertyActionListener target="#{FuncionarioVB.id}" value="#{Funcionario.id}" />
+				        <f:setPropertyActionListener target="#{FuncionarioVB.tela}" value="excluir" />
+			        </h:commandButton>
+                </h:column>
+                
+            </h:dataTable>        
+            <h:messages errorStyle="color:red;margin:8px;" infoStyle="color:blue;margin:8px;" layout="table"/>
+			<br/>
+            <h:commandButton value="Home" action="/index" immediate="true"/>
+        </h:form>
+    </body> 
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+    <h:head>
+    </h:head>
+    <body> 
+        <h1>Sistema de Controle de Cadastro</h1> 
+         <div align="center">
+            <h:form id="Venda">
+            <p:panelGrid id="formulario" style="width:75%;">
+                <p:focus context="formulario"/>
+                <f:facet name="header">
+                    <p:row>
+                        <p:column colspan="2" style="font-size:14px">
+                            Inclusão de Vendas
+                        </p:column>
+                    </p:row>
+                </f:facet>
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText value="Identificador : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="id" value="#{VendaVB.id}" size="20" disabled="true" label="Identificador" />
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Descrição : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="descricao" value="#{VendaVB.descricao}" size="50" required="true" label="Descrição" />
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Quantidade de Produto : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="quantidadeProduto" value="#{VendaVB.quantidadeProduto}" size="50" required="true" label="Quantidade de Produto" />
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Valor : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="valor" value="#{VendaVB.valor}" size="10" required="true" label="Valor" >
+                        </p:inputText>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Data da Venda : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="data" value="#{VendaVB.data}" size="10" required="true" label="Data da Venda" >
+                            <f:convertDateTime pattern="d/M/yyyy" />
+                        </p:inputText>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Nota Fiscal : " />
+                    </p:column>
+                    <p:column>
+                        <p:inputText id="notaFiscal" value="#{VendaVB.notaFiscal}" size="20" required="true" label="Nota Fiscal" />
+                    </p:column>
+                </p:row>
+                
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Identificador do Produto : " />
+                    </p:column>
+                    <p:column>
+                        <p:selectOneMenu value="#{VendaVB.idProduto}" label="Produto" required="true" >
+					<f:selectItem itemValue="#{null}" itemLabel="---Selecione----" noSelectionOption="true" />
+		   			<f:selectItems itemValue="#{Produto.id}" itemLabel="#{Produto.id} - #{Produto.nome}" value="#{VendaVB.listaProduto}" var="Produto"/>
+		   			</p:selectOneMenu>
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column style="width:30%;text-align:right;">
+                        <h:outputText  value="Identificador do Cliente : " />
+                    </p:column>
+                    <p:column>
+                        <p:selectOneMenu value="#{VendaVB.idCliente}" label="Produto" required="true" >
+					<f:selectItem itemValue="#{null}" itemLabel="---Selecione----" noSelectionOption="true" />
+		   			<f:selectItems itemValue="#{Cliente.id}" itemLabel="#{Cliente.id} - #{Cliente.nome}" value="#{VendaVB.listaCliente}" var="Cliente"/>
+		   			</p:selectOneMenu>
+                    </p:column>
+                </p:row>
+                
+                   <p:row>
+                       <p:column colspan="2" style="text-align:center;">
+			               <p:commandButton value="Cadastrar" action="#{VendaVB.cadastrar}" ajax="false"/>
+                           &nbsp;                        
+                           <p:commandButton value="Limpar" action="#{VendaVB.limpar}" immediate="true" ajax="false">
+                              <f:setPropertyActionListener target="#{VendaVB.tela}" value="limpar" />
+                           </p:commandButton>
+                       </p:column>
+                   </p:row>
+                   <p:row>
+                       <p:column colspan="2">
+                           <p:messages />
+                       </p:column>
+                   </p:row>
+            </p:panelGrid>
+            <br/>
+            <p:commandButton value="Home" action="/index" immediate="true"/>
+          </h:form>
+        </div>
+    </body> 
+</html>

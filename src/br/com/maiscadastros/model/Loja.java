@@ -1,14 +1,35 @@
 package br.com.maiscadastros.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "TABELA_LOJA")
 public class Loja
 {
     // Atributos
-    private int        id;
-    private String     nome;
-    private long       telefone;
-    private String     email;
-    private long       cnpj;
-    private String     endereco;
+	
+	@Id
+	@Column (name = "Codigo_Loja")
+	private int        id;
+	
+	@Column (name = "Nome_Loja")
+	private String     nome;
+	
+	@Column (name = "Telefone_Loja")
+	private long       telefone;
+	
+	@Column (name = "Email_loja")
+	private String     email;
+	
+	@Column (name = "CNPJ_Loja")
+	private long       cnpj;
+	
+	@Column (name = "Endereco_Loja")
+	private String     endereco;
+	
 
     // Construtores
     public Loja()

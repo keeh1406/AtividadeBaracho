@@ -9,11 +9,17 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import br.com.maiscadastros.controller.LojaController;
+import br.com.maiscadastros.controller.MarcaController;
 import br.com.maiscadastros.controller.ProdutoController;
+import br.com.maiscadastros.controller.SetorController;
 import br.com.maiscadastros.dto.LojaDto;
+import br.com.maiscadastros.dto.MarcaDto;
 import br.com.maiscadastros.dto.ProdutoDto;
+import br.com.maiscadastros.dto.SetorDto;
 import br.com.maiscadastros.model.Loja;
+import br.com.maiscadastros.model.Marca;
 import br.com.maiscadastros.model.Produto;
+import br.com.maiscadastros.model.Setor;
 
 @ViewScoped
 @ManagedBean(name="ProdutoVB")
@@ -23,14 +29,19 @@ public class ProdutoJavaBean
 	private Integer id;
 	private String nome;
 	private String nomeLoja;
+	private String nomeSetor;
+	private String nomeMarca;
 	private String descricao;
 	private Date dataValidade;
-	private String marca;
 	private Integer idLoja;
+	private Integer idMarca;
+	private Integer idSetor;
     private boolean edicao;
     private String  tela;
     private List<Produto> listaProduto;
     private List<Loja> listaLoja;
+    private List<Setor> listaSetor;
+    private List<Marca> listaMarca;
      
     public Integer getId() {
 		return id;
@@ -57,6 +68,26 @@ public class ProdutoJavaBean
     {
         nomeLoja = pNomeLoja;
     }
+    
+    public String getNomeSetor()
+    {
+        return nomeSetor;
+    }
+
+    public void setNomeSetor(String pNomeSetor)
+    {
+        nomeSetor = pNomeSetor;
+    }
+    
+    public String getNomeMarca()
+    {
+        return nomeMarca;
+    }
+
+    public void setNomeMarca(String pNomeMarca)
+    {
+        nomeMarca = pNomeMarca;
+    }
 
 	public String getDescricao() {
 		return descricao;
@@ -74,20 +105,28 @@ public class ProdutoJavaBean
 		this.dataValidade = dataValidade;
 	}
 
-	public String getMarca() {
-		return marca;
-	}
-
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-
 	public Integer getIdLoja() {
 		return idLoja;
 	}
 
 	public void setIdLoja(Integer idLoja) {
 		this.idLoja = idLoja;
+	}
+	
+	public Integer getIdMarcca() {
+		return idMarca;
+	}
+
+	public void setIdMarca(Integer idMarca) {
+		this.idMarca = idMarca;
+	}
+	
+	public Integer getIdSetor() {
+		return idSetor;
+	}
+
+	public void setIdSetor(Integer idSetor) {
+		this.idSetor = idSetor;
 	}
 
 	public boolean isEdicao() {
@@ -122,26 +161,41 @@ public class ProdutoJavaBean
 		this.listaLoja = listaLoja;
 	}
 	
+	public List<Setor> getListaSetor() {
+		return listaSetor;
+	}
+
+	public void setListaSetor(List<Setor> listaSetor) {
+		this.listaSetor = listaSetor;
+	}
+	
+	public List<Marca> getListaMarca() {
+		return listaMarca;
+	}
+
+	public void setListaMarca(List<Marca> listaMarca) {
+		this.listaMarca = listaMarca;
+	}
+	
 	@PostConstruct
     public void init()
     {
-		Produto tProduto2 = (Produto) FacesContext.getCurrentInstance().getExternalContext()
-                .getRequestMap().get("PRODUTO");
+		Produto tProduto2 = (Produto) FacesContext.getCurrentInstance().getExternalContext().getRequestMap().get("PRODUTO");
 if (tProduto2 != null)
 {
     id = tProduto2.getId();
     nome = tProduto2.getNome();
     descricao = tProduto2.getDescricao();
     dataValidade = java.sql.Date.valueOf(tProduto2.getDataValidade());
-    marca = tProduto2.getMarca();
     edicao = true;
 }
-        Produto tProduto = (Produto) FacesContext.getCurrentInstance().getExternalContext()
-                        .getRequestMap().get("PRODUTO");
+        Produto tProduto = (Produto) FacesContext.getCurrentInstance().getExternalContext().getRequestMap().get("PRODUTO");
         if (tProduto != null)
         {
             id = tProduto.getId();
             idLoja = tProduto.getIdLoja();
+            idMarca = tProduto.getIdMarca();
+            idSetor = tProduto.getIdSetor();
 
             LojaController tLojaController = new LojaController();
 
@@ -154,6 +208,32 @@ if (tProduto2 != null)
             else
             {
                 nomeLoja=null;
+            }
+            
+            MarcaController tMarcaController = new MarcaController();
+
+            MarcaDto tMarcaDto = tMarcaController.recuperarMarca(idMarca);
+            if (tMarcaDto.isOk())
+            {
+                Marca tMarca = tMarcaDto.getMarca();
+                nomeMarca = tMarca.getNome();
+            }
+            else
+            {
+                nomeMarca=null;
+            }
+            
+            SetorController tSetorController = new SetorController();
+
+            SetorDto tSetorDto = tSetorController.recuperarSetor(idSetor);
+            if (tSetorDto.isOk())
+            {
+                Setor tSetor = tSetorDto.getSetor();
+                nomeSetor = tSetor.getNome();
+            }
+            else
+            {
+                nomeSetor=null;
             }
         }
         
@@ -171,7 +251,41 @@ if (tProduto2 != null)
             FacesContext.getCurrentInstance().addMessage(null,
                             new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
         }
+        
+        MarcaController tController1 = new MarcaController();
+
+        MarcaDto tDto1 = tController1.pesquisarMarca();
+        if (tDto1.isOk())
+        {
+            // Ok, recuperado
+            listaMarca = tDto1.getLista();
+        }
+        else
+        {
+            // Colocando a mensagem do sistema
+            FacesContext.getCurrentInstance().addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto1.getMensagem(), tDto1.getMensagem()));
+        }
+        
+        SetorController tController11 = new SetorController();
+
+        SetorDto tDto11 = tController11.pesquisarSetor();
+        if (tDto11.isOk())
+        {
+            // Ok, recuperado
+            listaSetor = tDto11.getLista();
+        }
+        else
+        {
+            // Colocando a mensagem do sistema
+            FacesContext.getCurrentInstance().addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto11.getMensagem(), tDto11.getMensagem()));
+        }
+        
+        
     }
+	
+	
 
 	// Métodos da Controller
     public String limpar()
@@ -180,8 +294,9 @@ if (tProduto2 != null)
         nome = null;
         descricao = null;
         dataValidade = null;
-        marca = null;
         idLoja = null;
+        idSetor = null;
+        idMarca = null;
         edicao = false;
 
         return tela;
@@ -197,8 +312,9 @@ if (tProduto2 != null)
 	    tProduto.setDescricao(descricao);
 	    LocalDate tDataValidade = new java.sql.Date(dataValidade.getTime()).toLocalDate();
 	    tProduto.setDataValidade(tDataValidade);
-	    tProduto.setMarca(marca);
 	    tProduto.setIdLoja(idLoja);
+	    tProduto.setIdSetor(idSetor);
+	    tProduto.setIdMarca(idMarca);
 
 	    ProdutoController tController = new ProdutoController();
 
@@ -233,8 +349,9 @@ if (tProduto2 != null)
 	        tProduto.setDescricao(descricao);
 	        LocalDate tDataValidade = new java.sql.Date(dataValidade.getTime()).toLocalDate();
 	        tProduto.setDataValidade(tDataValidade);
-	        tProduto.setMarca(marca);
 	        tProduto.setIdLoja(idLoja);
+	        tProduto.setIdSetor(idSetor);
+	        tProduto.setIdMarca(idMarca);
 
 	        ProdutoController tController = new ProdutoController();
 
@@ -274,8 +391,9 @@ if (tProduto2 != null)
 	            nome = tProduto.getNome();
 	            descricao = tProduto.getDescricao();
 	            dataValidade = java.sql.Date.valueOf(tProduto.getDataValidade());
-	            marca = tProduto.getMarca();
 	            idLoja = tProduto.getIdLoja();
+	            idMarca = tProduto.getIdMarca();
+	            idSetor = tProduto.getIdSetor();
 
 	            // indicando que a pesquisa deu certo
 	            edicao = true;
@@ -365,9 +483,11 @@ if (tProduto2 != null)
 	    tBuilder.append(", ");
 	    tBuilder.append(dataValidade);
 	    tBuilder.append(", ");
-	    tBuilder.append(marca);
-	    tBuilder.append(", ");
 	    tBuilder.append(idLoja);
+	    tBuilder.append(", ");
+	    tBuilder.append(idSetor);
+	    tBuilder.append(", ");
+	    tBuilder.append(idMarca);
 	    tBuilder.append("]");
 	    return tBuilder.toString();
 	}
