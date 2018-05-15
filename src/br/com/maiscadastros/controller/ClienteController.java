@@ -6,147 +6,129 @@ import br.com.maiscadastros.dao.ClienteDao;
 import br.com.maiscadastros.dto.ClienteDto;
 import br.com.maiscadastros.model.Cliente;
 
-public class ClienteController 
-{
-    public ClienteDto cadastrarCliente(Cliente pCliente)
-    {
-        // Verificar as informações
-        if (pCliente == null)
-        {
-            return new ClienteDto(false, "Tentativa de inclusão de cliente nulo");
-        }
+public class ClienteController {
+	public ClienteDto cadastrarCliente(Cliente pCliente) {
+		// Verificar as informações
+		if (pCliente == null) {
+			return new ClienteDto(false, "Tentativa de inclusão de cliente nulo");
+		}
 
-        // Criando o objeto de persistência
-        ClienteDao tDao = new ClienteDao();
+		// Criando o objeto de persistência
+		ClienteDao tDao = new ClienteDao();
 
-        // Verificando se o cliente já existe
-        Cliente tCliente = tDao.recoveryByCpf(pCliente.getCpf());
-        if (tCliente != null)
-        {
-            return new ClienteDto(false, "Já existe um Cliente com o cpf informado");
-        }
+		// Verificando se o cliente já existe
+		Cliente tCliente = tDao.recoveryByCpf(pCliente.getCpf());
+		if (tCliente != null) {
+			return new ClienteDto(false, "Já existe um Cliente com o cpf informado");
+		}
 
-        // Incluindo o cliente
-        tCliente = tDao.create(pCliente);
-        if (tCliente == null)
-        {
-            return new ClienteDto(false, "Erro no processo de inclusão");
-        }
+		// Incluindo o cliente
+		tCliente = tDao.create(pCliente);
+		if (tCliente == null) {
+			return new ClienteDto(false, "Erro no processo de inclusão");
+		}
 
-        // Retornando o indicativo de sucesso
-        return new ClienteDto(true, "Cliente incluído com sucesso", tCliente);
-    }
+		// Retornando o indicativo de sucesso
+		return new ClienteDto(true, "Cliente incluído com sucesso", tCliente);
+	}
 
-    public ClienteDto recuperarCliente(int pId)
-    {
-        // Verificar as informações
-        if (pId <=0)
-        {
-            return new ClienteDto(false, "Identificador do cliente inválido");
-        }
+	public ClienteDto recuperarCliente(int pId) {
+		// Verificar as informações
+		if (pId <= 0) {
+			return new ClienteDto(false, "Identificador do cliente inválido");
+		}
 
-        // Criando o objeto de persistência
-        ClienteDao tDao = new ClienteDao();
+		// Criando o objeto de persistência
+		ClienteDao tDao = new ClienteDao();
 
-        // Recuperando o Cliente
-        Cliente tCliente = tDao.recovery(pId);
-        if (tCliente == null)
-        {
-            return new ClienteDto(false, "Não existe cliente com o identificador informado");
-        }
+		// Recuperando o Cliente
+		Cliente tCliente = tDao.recovery(pId);
+		if (tCliente == null) {
+			return new ClienteDto(false, "Não existe cliente com o identificador informado");
+		}
 
-        // Retornando o indicativo de sucesso
-        return new ClienteDto(true, "Cliente recuperado com sucesso", tCliente);
-    }
+		// Retornando o indicativo de sucesso
+		return new ClienteDto(true, "Cliente recuperado com sucesso", tCliente);
+	}
 
-    public ClienteDto atualizarCliente(Cliente pCliente)
-    {
-        // Verificar as informações
-        if (pCliente == null)
-        {
-            return new ClienteDto(false, "Tentativa de atualização de cliente nulo");
-        }
+	public ClienteDto atualizarCliente(Cliente pCliente) {
+		// Verificar as informações
+		if (pCliente == null) {
+			return new ClienteDto(false, "Tentativa de atualização de cliente nulo");
+		}
 
-        // Criando o objeto de persistência
-        ClienteDao tDao = new ClienteDao();
+		// Criando o objeto de persistência
+		ClienteDao tDao = new ClienteDao();
 
-        // Recuperando o Cliente
-        Cliente tCliente = tDao.recovery(pCliente.getId());
-        if (tCliente == null)
-        {
-            return new ClienteDto(false, "Não existe Cliente com o identificador informado");
-        }
+		// Recuperando o Cliente
+		Cliente tCliente = tDao.recovery(pCliente.getId());
+		if (tCliente == null) {
+			return new ClienteDto(false, "Não existe Cliente com o identificador informado");
+		}
 
-        if (pCliente.getCpf() != tCliente.getCpf())
-        {
-            // Verificando se existe um Cliente com o novo CPF
-            tCliente = tDao.recoveryByCpf(pCliente.getCpf());
-            if (tCliente != null)
-            {
-                return new ClienteDto(false, "Já existe Cliente com o cpf informado");
-            }
-        }
+		if (pCliente.getCpf() != tCliente.getCpf()) {
+			// Verificando se existe um Cliente com o novo CPF
+			tCliente = tDao.recoveryByCpf(pCliente.getCpf());
+			if (tCliente != null) {
+				return new ClienteDto(false, "Já existe Cliente com o cpf informado");
+			}
+		}
 
-        // Atualizando o Cliente
-        tCliente = tDao.update(pCliente);
-        if (tCliente == null)
-        {
-            return new ClienteDto(false, "Não existe cliente com o identificador informado");
-        }
+		// Atualizando o Cliente
+		tCliente = tDao.update(pCliente);
+		if (tCliente == null) {
+			return new ClienteDto(false, "Não existe cliente com o identificador informado");
+		}
 
-        // Retornando o indicativo de sucesso
-        return new ClienteDto(true, "Cliente alterado com sucesso", tCliente);
-    }
+		// Retornando o indicativo de sucesso
+		return new ClienteDto(true, "Cliente alterado com sucesso", tCliente);
+	}
 
-    public ClienteDto removeCliente(int pId)
-    {
-        // Verificar as informações
-        if (pId <=0)
-        {
-            return new ClienteDto(false, "Identificador do cliente inválido");
-        }
+	public ClienteDto removeCliente(Cliente cliente) {
+		// Verificar as informações
+		if (cliente.getId() <= 0) {
+			return new ClienteDto(false, "Identificador do cliente inválido");
+		}
 
-        // Criando o objeto de persistência
-        ClienteDao tDao = new ClienteDao();
+		// Criando o objeto de persistência
+		ClienteDao tDao = new ClienteDao();
 
-        // Incluindo o Cliente
-        if (tDao.delete(pId))
-        {
-            // Retornando o indicativo de sucesso
-            return new ClienteDto(true, "Cliente removido com sucesso");
-        }
+		// Incluindo o Cliente
 
-        // Retornando o indicativo de erro
-        return new ClienteDto(false, "Erro no processo de remoção");
-    }
+		tDao.delete(cliente);
 
-public ClienteDto pesquisarClientesPorNome(String pNome)
-{
-    // Criando a lista de retorno
-    List<Cliente> tLista = new ArrayList<>();
+		// Retornando o indicativo de sucesso
+		return new ClienteDto(true, "Cliente removido com sucesso");
 
-    // Criando o objeto de persistência
-    ClienteDao tDao = new ClienteDao();
+		// Retornando o indicativo de erro
+		// return new ClienteDto(false, "Erro no processo de remoção");
+	}
 
-    // Recuperando o Cliente
-    tLista = tDao.searchByNome(pNome);
+	public ClienteDto pesquisarClientesPorNome(String pNome) {
+		// Criando a lista de retorno
+		List<Cliente> tLista = new ArrayList<>();
 
-    // Retornando o indicativo de sucesso
-    return new ClienteDto(true, "Lista de Clientes recuperada com sucesso", tLista);
-}
+		// Criando o objeto de persistência
+		ClienteDao tDao = new ClienteDao();
 
-public ClienteDto pesquisarCliente()
-{
-    // Criando a lista de retorno
-    List<Cliente> tLista = new ArrayList<>();
+		// Recuperando o Cliente
+		tLista = tDao.searchByNome(pNome);
 
-    // Criando o objeto de persistência
-    ClienteDao tDao = new ClienteDao();
+		// Retornando o indicativo de sucesso
+		return new ClienteDto(true, "Lista de Clientes recuperada com sucesso", tLista);
+	}
 
-    // Recuperando o Cliente
-    tLista = tDao.search();
+	public ClienteDto pesquisarCliente() {
+		// Criando a lista de retorno
+		List<Cliente> tLista = new ArrayList<>();
 
-    // Retornando o indicativo de sucesso
-    return new ClienteDto(true, "Lista de Clientes recuperada com sucesso", tLista);
-}
+		// Criando o objeto de persistência
+		ClienteDao tDao = new ClienteDao();
+
+		// Recuperando o Cliente
+		tLista = tDao.search();
+
+		// Retornando o indicativo de sucesso
+		return new ClienteDto(true, "Lista de Clientes recuperada com sucesso", tLista);
+	}
 }

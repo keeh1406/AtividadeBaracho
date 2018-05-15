@@ -88,10 +88,10 @@ public class ProdutoController
         return new ProdutoDto(true, "Produto alterado com sucesso", tProduto);
     }
 
-    public ProdutoDto removeProduto(int pId)
+    public ProdutoDto removeProduto(Produto produto)
     {
         // Verificar as informações
-        if (pId <=0)
+        if (produto.getId() <=0)
         {
             return new ProdutoDto(false, "Identificador do Produto inválido");
         }
@@ -99,15 +99,8 @@ public class ProdutoController
         // Criando o objeto de persistência
         ProdutoDao tDao = new ProdutoDao();
 
-        // Incluindo o Produto
-        if (tDao.delete(pId))
-        {
-            // Retornando o indicativo de sucesso
-            return new ProdutoDto(true, "Produto removido com sucesso");
-        }
-
-        // Retornando o indicativo de erro
-        return new ProdutoDto(false, "Erro no processo de remoção");
+        tDao.delete(produto);
+        return new ProdutoDto(true, "Produto removido com sucesso");
     }
     
     public ProdutoDto pesquisarProdutosPorNome(String pNome)

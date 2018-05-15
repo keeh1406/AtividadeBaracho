@@ -33,9 +33,9 @@ public class ProdutoDao
 		return produto;
 	}
 
-	public Produto recoveryByCpf(long cpf) {
+	public Produto recoveryByNome(String nome) {
 
-		Produto produto = (Produto) this.session.get(Produto.class, cpf);
+		Produto produto = (Produto) this.session.get(Produto.class, nome);
 
 		return produto;
 

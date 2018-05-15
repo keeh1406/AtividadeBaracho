@@ -97,10 +97,10 @@ public class FuncionarioController
         return new FuncionarioDto(true, "Funcionario alterado com sucesso", tFuncionario);
     }
 
-    public FuncionarioDto removeFuncionario(int pId)
+    public FuncionarioDto removeFuncionario(Funcionario funcionario)
     {
         // Verificar as informações
-        if (pId <=0)
+        if (funcionario.getId() <=0)
         {
             return new FuncionarioDto(false, "Identificador do Funcionario inválido");
         }
@@ -108,16 +108,20 @@ public class FuncionarioController
         // Criando o objeto de persistência
         FuncionarioDao tDao = new FuncionarioDao();
 
+        tDao.delete(funcionario);
+        return new FuncionarioDto(true, "Funcionario removido com sucesso");
+    }
+        
         // Incluindo o Funcionario
-        if (tDao.delete(pId))
-        {
-            // Retornando o indicativo de sucesso
-            return new FuncionarioDto(true, "Funcionario removido com sucesso");
-        }
+//        if (tDao.delete(pId))
+//        {
+//            // Retornando o indicativo de sucesso
+//            return new FuncionarioDto(true, "Funcionario removido com sucesso");
+//        }
 
         // Retornando o indicativo de erro
-        return new FuncionarioDto(false, "Erro no processo de remoção");
-    }
+//        return new FuncionarioDto(false, "Erro no processo de remoção");
+
     
     public FuncionarioDto pesquisarFuncionariosPorNome(String pNome)
     {

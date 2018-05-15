@@ -84,24 +84,20 @@ public class VendaController {
 		return new VendaDto(true, "Venda alterado com sucesso", tVenda);
 	}
 
-	public VendaDto removeVenda(int pId) {
-		// Verificar as informações
-		if (pId <= 0) {
-			return new VendaDto(false, "Identificador do Venda inválido");
-		}
+	public VendaDto removeVenda(Venda venda)
+    {
+        // Verificar as informações
+        if (venda.getId() <=0)
+        {
+            return new VendaDto(false, "Identificador da Venda inválido");
+        }
 
-		// Criando o objeto de persistência
-		VendaDao tDao = new VendaDao();
+        // Criando o objeto de persistência
+        VendaDao tDao = new VendaDao();
 
-		// Incluindo o Venda
-		if (tDao.delete(pId)) {
-			// Retornando o indicativo de sucesso
-			return new VendaDto(true, "Venda removido com sucesso");
-		}
-
-		// Retornando o indicativo de erro
-		return new VendaDto(false, "Erro no processo de remoção");
-	}
+        tDao.delete(venda);
+        return new VendaDto(true, "Venda removida com sucesso");
+    }
 
 	public VendaDto pesquisarVendasPorDescricao(String pDescricao) {
 		// Criando a lista de retorno

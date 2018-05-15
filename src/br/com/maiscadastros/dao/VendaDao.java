@@ -34,9 +34,9 @@ public class VendaDao
 		return venda;
 	}
 
-	public Venda recoveryByCpf(long cpf) {
+	public Venda recoveryByNotaFiscal(long notaFiscal) {
 
-		Venda venda = (Venda) this.session.get(Venda.class, cpf);
+		Venda venda = (Venda) this.session.get(Venda.class, notaFiscal);
 
 		return venda;
 
@@ -65,11 +65,11 @@ public class VendaDao
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Venda> searchByNome(String nome) {
+	public List<Venda> searchByDescricao(String descricao) {
 
 		List<Venda> lista = null;
 
-		Criteria criteria = this.session.createCriteria(Venda.class).add(Restrictions.like("nome", nome));
+		Criteria criteria = this.session.createCriteria(Venda.class).add(Restrictions.like("nome", descricao));
 
 		lista = (List<Venda>) criteria.list();
 

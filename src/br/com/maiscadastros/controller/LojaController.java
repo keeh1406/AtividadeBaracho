@@ -98,27 +98,20 @@ public class LojaController
         return new LojaDto(true, "Loja alterado com sucesso", tLoja);
     }
 
-    public LojaDto removeLoja(int pId)
+    public LojaDto removeLoja(Loja loja)
     {
         // Verificar as informações
-        if (pId <=0)
+        if (loja.getId() <=0)
         {
-            return new LojaDto(false, "Identificador do Loja inválido");
+            return new LojaDto(false, "Identificador da Loja inválido");
         }
 
-        // Criando o objeto de persistência
         LojaDao tDao = new LojaDao();
 
-        // Incluindo o Loja
-        if (tDao.delete(pId))
-        {
-            // Retornando o indicativo de sucesso
-            return new LojaDto(true, "Loja removido com sucesso");
-        }
-
-        // Retornando o indicativo de erro
-        return new LojaDto(false, "Erro no processo de remoção");
+        tDao.delete(loja);
+        return new LojaDto(true, "Loja removida com sucesso");
     }
+    
     public LojaDto pesquisarLojasPorNome(String pNome)
     {
         // Criando a lista de retorno

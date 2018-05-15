@@ -33,9 +33,9 @@ public class LojaDao
 		return loja;
 	}
 
-	public Loja recoveryByCpf(long cpf) {
+	public Loja recoveryByCnpj(long cnpj) {
 
-		Loja loja = (Loja) this.session.get(Loja.class, cpf);
+		Loja loja = (Loja) this.session.get(Loja.class, cnpj);
 
 		return loja;
 
