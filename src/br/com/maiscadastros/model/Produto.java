@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,13 +27,16 @@ public class Produto
 	@Column (name = "DataValidade_Produto")
 	private LocalDate   dataValidade;
 	
-	@Column (name = "ID_Loja")
+	@ManyToOne
+	@JoinColumn (name = "ID_Loja")
 	private Loja loja;
 	
-	@Column (name = "ID_Setor")
+	@ManyToOne
+	@JoinColumn (name = "ID_Setor")
 	private Setor setor;
 	
-	@Column (name = "ID_Marca")
+	@ManyToOne
+	@JoinColumn (name = "ID_Marca")
 	private Marca marca;
 
  // Construtores

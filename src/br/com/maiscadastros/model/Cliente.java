@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.maiscadastros.model.Usuario;
@@ -22,7 +24,8 @@ public class Cliente extends Usuario
 	@Column (name = "CPF_Cliente")
 	private long      cpf;
 	
-	@Column (name = "Endereco_Cliente")
+	@ManyToOne
+	@JoinColumn (name = "Endereco_Cliente")
 	private String    endereco;
 
     // Construtores

@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.maiscadastros.model.Usuario;
@@ -27,7 +29,8 @@ public class Funcionario extends Usuario {
 	@Column(name = "FL_GERENTE")
 	private boolean flGerente;
 
-	@Column(name = "IDLOJA")
+	@ManyToOne
+	@JoinColumn(name = "IDLOJA")
 	private Loja loja;
 
 	// Construtores

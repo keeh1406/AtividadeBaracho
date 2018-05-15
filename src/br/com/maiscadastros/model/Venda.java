@@ -2,6 +2,8 @@ package br.com.maiscadastros.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import java.math.BigDecimal;
@@ -31,10 +33,12 @@ public class Venda
 	@Column (name = "NotaFiscal_Venda")
 	private long        notaFiscal;
 	
-	@Column (name = "ID_Produto")
+	@ManyToOne
+	@JoinColumn (name = "ID_Produto")
 	private Produto produto;
 	
-	@Column (name = "ID_Cliente")
+	@ManyToOne
+	@JoinColumn (name = "ID_Cliente")
 	private Cliente cliente;
 	
 

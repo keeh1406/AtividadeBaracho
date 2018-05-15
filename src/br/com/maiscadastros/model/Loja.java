@@ -3,6 +3,8 @@ package br.com.maiscadastros.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,7 +29,8 @@ public class Loja
 	@Column (name = "CNPJ_Loja")
 	private long       cnpj;
 	
-	@Column (name = "Endereco_Loja")
+	@ManyToOne
+	@JoinColumn (name = "Endereco_Loja")
 	private String     endereco;
 	
 
