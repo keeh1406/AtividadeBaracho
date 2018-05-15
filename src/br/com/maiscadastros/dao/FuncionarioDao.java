@@ -26,11 +26,9 @@ public Funcionario create(Funcionario funcionario) {
 	return null;
 }
 
-public Funcionario recovery(Integer id) {
+public Funcionario recovery(Funcionario funcionario) {
 
-	Funcionario funcionario = (Funcionario) this.session.get(Funcionario.class, id);
-
-	return funcionario;
+	return 	 (Funcionario) this.session.get(Funcionario.class, funcionario.getId());
 }
 
 public Funcionario recoveryByCpf(long cpf) {

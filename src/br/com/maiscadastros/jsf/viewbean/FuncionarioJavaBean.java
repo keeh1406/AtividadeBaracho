@@ -29,7 +29,7 @@ public class FuncionarioJavaBean {
 	private Long cpf;
 	private String endereco;
 	private Boolean flGerente;
-	private Integer idLoja;
+	private Loja loja;
 	private boolean edicao;
 	private String tela;
 	private List<Funcionario> listaFuncionario;
@@ -115,12 +115,12 @@ public class FuncionarioJavaBean {
 		this.flGerente = flGerente;
 	}
 
-	public Integer getIdLoja() {
-		return idLoja;
+	public Loja getLoja() {
+		return loja;
 	}
 
-	public void setIdLoja(Integer idLoja) {
-		this.idLoja = idLoja;
+	public void setLoja(Loja loja) {
+		this.loja = loja;
 	}
 
 	public boolean isEdicao() {
@@ -166,7 +166,7 @@ public class FuncionarioJavaBean {
 		cpf = null;
 		endereco = null;
 		flGerente = null;
-		idLoja = null;
+		loja = null;
 		edicao = false;
 
 		return tela;
@@ -193,11 +193,11 @@ if (tFuncionario2 != null)
 				.get("FUNCIONÁRIO");
 		if (tFuncionario != null) {
 			id = tFuncionario.getId();
-			idLoja = tFuncionario.getIdLoja();
+			loja = tFuncionario.getLoja();
 
 			LojaController tLojaController = new LojaController();
 
-			LojaDto tLojaDto = tLojaController.recuperarLoja(idLoja);
+			LojaDto tLojaDto = tLojaController.recuperarLoja(loja);
 			if (tLojaDto.isOk()) {
 				Loja tLoja = tLojaDto.getLoja();
 				nomeLoja = tLoja.getNome();
@@ -233,7 +233,7 @@ if (tFuncionario2 != null)
 		tFuncionario.setCpf(cpf);
 		tFuncionario.setEndereco(endereco);
 		tFuncionario.setFlGerente(flGerente);
-		tFuncionario.setIdLoja(idLoja);
+		tFuncionario.setLoja(loja);
 
 		FuncionarioController tController = new FuncionarioController();
 
@@ -288,12 +288,12 @@ if (tFuncionario2 != null)
 		return null;
 	}
 
-	public String consultar() {
+	public String consultar(Funcionario funcionario) {
 		System.out.println("FuncionarioVB - Consultar : " + this);
 
 		FuncionarioController tController = new FuncionarioController();
 
-		FuncionarioDto tDto = tController.recuperarFuncionario(id);
+		FuncionarioDto tDto = tController.recuperarFuncionario(funcionario);
 		if (tDto.isOk()) {
 			// Ok, recuperado
 			Funcionario tFuncionario = tDto.getFuncionario();
@@ -306,7 +306,7 @@ if (tFuncionario2 != null)
 			cpf = tFuncionario.getCpf();
 			endereco = tFuncionario.getEndereco();
 			flGerente = tFuncionario.getFlGerente();
-			idLoja = tFuncionario.getIdLoja();
+			loja = tFuncionario.getLoja();
 
 			// indicando que a pesquisa deu certo
 			edicao = true;
@@ -323,12 +323,12 @@ if (tFuncionario2 != null)
 		return tela;
 	}
 
-	public String excluir() {
+	public String excluir(Funcionario funcionario) {
 		System.out.println("FuncionarioVB - Excluir : " + this);
 
 		FuncionarioController tController = new FuncionarioController();
 
-		FuncionarioDto tDto = tController.removeFuncionario(id);
+		FuncionarioDto tDto = tController.removeFuncionario(funcionario);
 		if (tDto.isOk()) {
 			// Ok, exluido
 			limpar();
@@ -395,7 +395,7 @@ if (tFuncionario2 != null)
 		tBuilder.append(", ");
 		tBuilder.append(flGerente);
 		tBuilder.append(", ");
-		tBuilder.append(idLoja);
+		tBuilder.append(loja);
 		tBuilder.append("]");
 		return tBuilder.toString();
 	}

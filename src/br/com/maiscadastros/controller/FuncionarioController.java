@@ -37,10 +37,10 @@ public class FuncionarioController
         return new FuncionarioDto(true, "Funcionario incluído com sucesso", tFuncionario);
     }
 
-    public FuncionarioDto recuperarFuncionario(int pId)
+    public FuncionarioDto recuperarFuncionario(Funcionario funcionario)
     {
         // Verificar as informações
-        if (pId <=0)
+        if (funcionario.getId() <=0)
         {
             return new FuncionarioDto(false, "Identificador do Funcionario inválido");
         }
@@ -49,7 +49,7 @@ public class FuncionarioController
         FuncionarioDao tDao = new FuncionarioDao();
 
         // Recuperando o Funcionario
-        Funcionario tFuncionario = tDao.recovery(pId);
+        Funcionario tFuncionario = tDao.recovery(funcionario);
         if (tFuncionario == null)
         {
             return new FuncionarioDto(false, "Não existe Funcionario com o identificador informado");
@@ -59,10 +59,10 @@ public class FuncionarioController
         return new FuncionarioDto(true, "Funcionario recuperado com sucesso", tFuncionario);
     }
 
-    public FuncionarioDto atualizarFuncionario(Funcionario pFuncionario)
+    public FuncionarioDto atualizarFuncionario(Funcionario funcionario)
     {
         // Verificar as informações
-        if (pFuncionario == null)
+        if (funcionario == null)
         {
             return new FuncionarioDto(false, "Tentativa de atualização de Funcionario nulo");
         }
@@ -71,23 +71,23 @@ public class FuncionarioController
         FuncionarioDao tDao = new FuncionarioDao();
 
         // Recuperando o Funcionario
-        Funcionario tFuncionario = tDao.recovery(pFuncionario.getId());
+        Funcionario tFuncionario = tDao.recovery(funcionario);
         if (tFuncionario == null)
         {
             return new FuncionarioDto(false, "Não existe Funcionario com o identificador informado");
         }
 
-        if (pFuncionario.getCpf() != tFuncionario.getCpf())
+        if (funcionario.getCpf() != tFuncionario.getCpf())
         {
             // Verificando se existe um Funcionario com o novo CPF
-            tFuncionario = tDao.recoveryByCpf(pFuncionario.getCpf());
+            tFuncionario = tDao.recoveryByCpf(funcionario.getCpf());
             if (tFuncionario != null)
             {
                 return new FuncionarioDto(false, "Já existe Funcionario com o cpf informado");
             }
         }
         // Atualizando o Funcionario
-        tFuncionario = tDao.update(pFuncionario);
+        tFuncionario = tDao.update(funcionario);
         if (tFuncionario == null)
         {
             return new FuncionarioDto(false, "Não existe Funcionario com o identificador informado");

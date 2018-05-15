@@ -26,11 +26,9 @@ public class LojaDao
 		return null;
 	}
 
-	public Loja recovery(Integer id) {
+	public Loja recovery(Loja loja) {
 
-		Loja loja = (Loja) this.session.get(Loja.class, id);
-
-		return loja;
+		return 	 (Loja) this.session.get(Loja.class, loja.getId());
 	}
 
 	public Loja recoveryByCnpj(long cnpj) {

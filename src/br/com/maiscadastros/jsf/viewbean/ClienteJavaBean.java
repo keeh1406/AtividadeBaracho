@@ -265,13 +265,13 @@ public String consultar()
     return tela;
 }
 
-public String excluir()
+public String excluir(Cliente cliente)
 {
     System.out.println("ClienteVB - Excluir : " + this);
 
     ClienteController tController = new ClienteController();
 
-    ClienteDto tDto = tController.removeCliente(id);
+    ClienteDto tDto = tController.removeCliente(cliente);
     if (tDto.isOk())
     {
         // Ok, exluido

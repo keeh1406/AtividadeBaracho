@@ -198,13 +198,13 @@ public class LojaJavaBean
 	        return null;
 	    }
 
-	    public String consultar()
+	    public String consultar(Loja loja)
 	    {
 	        System.out.println("LojaVB - Consultar : " + this);
 
 	        LojaController tController = new LojaController();
 
-	        LojaDto tDto = tController.recuperarLoja(id);
+	        LojaDto tDto = tController.recuperarLoja(loja);
 	        if (tDto.isOk())
 	        {
 	            // Ok, recuperado
@@ -233,13 +233,13 @@ public class LojaJavaBean
 	        return tela;
 	    }
 
-	    public String excluir()
+	    public String excluir(Loja loja)
 	    {
 	        System.out.println("LojaVB - Excluir : " + this);
 
 	        LojaController tController = new LojaController();
 
-	        LojaDto tDto = tController.removeLoja(id);
+	        LojaDto tDto = tController.removeLoja(loja);
 	        if (tDto.isOk())
 	        {
 	            // Ok, exluido
